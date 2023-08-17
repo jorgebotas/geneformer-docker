@@ -1,0 +1,19 @@
+# To ensure app dependencies are ported from your virtual environment/host machine into your container, run 'pip freeze > requirements.txt' in the terminal to overwrite this file
+datasets
+loompy
+numpy
+pytz
+torch
+transformers==4.31.0
+tqdm>=4.27 # same as transfomers
+
+# insilico_perturber_stats.py
+statsmodels
+seaborn
+scikit-learn
+scipy
+
+# emb_extractor.py
+anndata
+scanpy
+seaborn

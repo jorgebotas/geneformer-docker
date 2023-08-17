@@ -1,0 +1,3 @@
+[submodule "Geneformer"]
+	path = Geneformer
+	url = https://huggingface.co/ctheodoris/Geneformer/tree/main
