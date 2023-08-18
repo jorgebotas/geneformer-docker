@@ -17,7 +17,9 @@ ENV TORCH_SEED=42
 # Copy necessary files
 COPY requirements.txt .
 COPY Geneformer /Geneformer
-COPY Genecorpus /Genecorpus
+
+# Update package repositories and install GCC
+RUN apt-get update && apt-get install -y gcc
 
 # Install pip requirements
 RUN pip install --no-cache-dir --upgrade pip
@@ -25,16 +27,18 @@ RUN python -m pip install -r requirements.txt
 # Install Geneformer
 RUN python -m pip install ./Geneformer
 
-WORKDIR /app
-COPY . /app
+WORKDIR /pretraining
+COPY . /pretraining
 
-ENV ROOT_DIR="/app"
+ENV ROOT_DIR="/pretraining"
 RUN mkdir -p ${ROOT_DIR}
 
-# Creates a non-root user with an explicit UID and adds permission to access the /app folder
-# For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
-RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+# Creates a non-root user with an explicit UID and adds permission to access the
+# /pretraining folder. For more info, please refer to 
+# https://aka.ms/vscode-docker-python-configure-containers
+RUN adduser -u 5678 --disabled-password --gecos "" appuser && \
+    chown -R appuser /pretraining
 USER appuser
 
-# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
 CMD ["python", "-u", "app.py"]
+# CMD ["zsh"]

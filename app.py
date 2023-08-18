@@ -47,7 +47,7 @@ def get_run_name(timezone: str = "US/Eastern") -> str:
     run += f"EMB{get_model('hidden_size')}_"
     run += f"ID{get_model('max_position_embeddings')}_"
     run += f"E{get_training('num_train_epochs')}_"
-    run += f"B{get_training('per_devide_train_batch_size')}_"
+    run += f"B{get_training('per_device_train_batch_size')}_"
     run += f"LR{get_training('learning_rate')}_"
     run += f"LS{get_training('lr_scheduler_type')}_"
     run += f"WU{get_training('warmup_steps')}"
@@ -97,7 +97,7 @@ MODEL_PARAMETERS = {
     # <pad> token id from TOKEN_DICT
     "pad_token_id": TOKEN_DICT.get("<pad>"), # BERT default = 0 (idem)
     # Max input size, i.e. max sequence length (2^11 = 2048)
-    "max_position_embeddings": 2**1,
+    "max_position_embeddings": 2**11,
     # Dimensionality of the encoder layers and the pooler layer
     "hidden_size": n_embedding_dimensions,
     # Dimensionality of the “intermediate” (i.e., feed-forward) layer
@@ -117,7 +117,7 @@ MODEL_PARAMETERS = {
     "layer_norm_eps": 1e-12, # BERT default 1e-12
     # Use gradient checkpointing to save memory at the expense of slower 
     # backward pass
-    "gradient_checkpointing": False, # BERT default = False
+    "gradient_checkpointing": True, # BERT default = False
 }
 
 # ----- TRAINING PARAMETERS ----------------------------------------------------
@@ -138,7 +138,7 @@ TRAINING_PARAMETERS = {
     # LayerNorm weights in AdamW optimizer.
     "weight_decay": 1e-3, # BERT default = 0
     # The batch size per GPU/TPU/MPS/NPU core/CPU for training
-    "per_devide_train_batch_size": batch_size, # BERT default = 8
+    "per_device_train_batch_size": batch_size, # BERT default = 8
     # Total number of training epochs to perform
     "num_train_epochs": 3, # BERT default = 3
     # The checkpoint save strategy to adopt during training
@@ -146,8 +146,6 @@ TRAINING_PARAMETERS = {
     # Number of updates steps before two checkpoint saves
     # n_saves_epoch (8) saves per epoch
     "save_steps": np.floor((dataset.num_rows / batch_size) / n_saves_epoch),
-    # TensorBoard log directory
-    "logging_dir": "",
     # Number of update steps between two logs
     "logging_steps": 1000,
     # Group together samples of roughly the same length in the training dataset 
@@ -162,15 +160,16 @@ TRAINING_PARAMETERS = {
 # ----- CREATE OUTPUT DIRECTORIES FOR MODEL ------------------------------------
 # Get run name with datestamp, model and training parameters
 run = get_run_name()
-logging_dir = path(f"runs/{run}")
-training_dir = path(f"models/{run}")
+# TensorBoard log directory
+logging_dir = path(f"output/runs/{run}")
+training_dir = path(f"output/models/{run}")
 model_dir = path(training_dir, "models")
 model_file = path(model_dir, "pytorch_model.bin")
 print(f"> Run name: {run}")
 # Avoid overwritting previously saved model
 if os.path.isfile(model_file):
     raise Exception("Model already saved to this directory.")
-# Create training and model directories
+# Create training and model directories (mounted to host disk)
 os.makedirs(training_dir, exist_ok=True)
 os.makedirs(model_dir, exist_ok=True)
 
