@@ -122,7 +122,7 @@ MODEL_PARAMETERS = {
     "layer_norm_eps": 1e-12, # BERT default 1e-12
     # Use gradient checkpointing to save memory at the expense of slower 
     # backward pass
-    "gradient_checkpointing": True, # BERT default = False
+    "gradient_checkpointing": False, # BERT default = False
 }
 
 # ----- TRAINING PARAMETERS ----------------------------------------------------
