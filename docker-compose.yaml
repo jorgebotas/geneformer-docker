@@ -17,4 +17,4 @@ services:
       - ${PRETRAINING_INPUT_PATH}:/pretraining/input
       - ${PRETRAINING_OUTPUT_PATH}:/pretraining/output
     ports:
-      - "4303:3000"
+      - "4304:3000"
