@@ -148,7 +148,7 @@ TRAINING_PARAMETERS = {
     # n_saves_epoch (8) saves per epoch
     "save_steps": np.floor((dataset.num_rows / batch_size) / n_saves_epoch),
     # Number of update steps between two logs
-    "logging_steps": 1000,
+    "logging_steps": 10, # 1000
     # Group together samples of roughly the same length in the training dataset 
     # (to minimize padding applied and be more efficient). Dynamic padding
     "group_by_length": True, # BERT default = False
