@@ -42,7 +42,7 @@ def get_run_name(timezone: str = "US/Eastern") -> str:
     timezone = pytz.timezone(timezone)
     date = datetime.datetime.now(tz=timezone)
     datestamp = f"{str(date.year)[-2:]}.{date.month:02d}.{date.day:02d}_"
-    datestamp += f"{date.strftime('%X')}__"
+    datestamp += f"{date.strftime('%X')}"
     run = f"{datestamp}__"
     run += f"NL-{get_model('num_hidden_layers')}__"
     run += f"EMB-{get_model('hidden_size')}__"
