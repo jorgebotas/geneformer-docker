@@ -42,7 +42,7 @@ RUN adduser -u 5678 --disabled-password --gecos "" appuser && \
 USER appuser
 
 # Run as appuser to allow reading/writing permissions
-RUN mkdir -p ${ROOT_DIR}
+RUN mkdir -p ${ROOT_DIR} && chmod 777 ${ROOT_DIR}
 
 CMD ["python", "-u", "app.py"]
 # CMD ["bash"]

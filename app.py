@@ -171,7 +171,7 @@ print(f"> Run name: {run}")
 if os.path.isfile(model_file):
     raise Exception("Model already saved to this directory.")
 # Create training and model directories (mounted to host disk)
-os.makedirs(training_dir, exist_ok=True)
+os.makedirs(logging_dir, exist_ok=True)
 os.makedirs(model_dir, exist_ok=True)
 
 
