@@ -1,4 +1,7 @@
+.DS_Store
 pretraining/
+Genecorpus-30M/
+Geneformer/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

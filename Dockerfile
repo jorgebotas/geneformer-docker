@@ -16,6 +16,8 @@ ENV TORCH_SEED=42
 
 # Copy necessary files
 COPY requirements.txt .
+# Clone Geneformer repo
+RUN git clone https://huggingface.co/ctheodoris/Geneformer
 COPY Geneformer /Geneformer
 
 # Update package repositories and install GCC
@@ -31,7 +33,6 @@ WORKDIR /pretraining
 COPY . /pretraining
 
 ENV ROOT_DIR="/pretraining"
-RUN mkdir -p ${ROOT_DIR}
 
 # Creates a non-root user with an explicit UID and adds permission to access the
 # /pretraining folder. For more info, please refer to 
@@ -40,5 +41,8 @@ RUN adduser -u 5678 --disabled-password --gecos "" appuser && \
     chown -R appuser /pretraining
 USER appuser
 
+# Run as appuser to allow reading/writing permissions
+RUN mkdir -p ${ROOT_DIR}
+
 CMD ["python", "-u", "app.py"]
-# CMD ["zsh"]
+# CMD ["bash"]

@@ -14,7 +14,7 @@ services:
     
     # privileged: true
     volumes:
-      - ${PRETRAINING_INPUT_PATH}:/pretraining/Genecorpus
+      - ${PRETRAINING_INPUT_PATH}:/pretraining/input
       - ${PRETRAINING_OUTPUT_PATH}:/pretraining/output
     ports:
       - "4300:3000"

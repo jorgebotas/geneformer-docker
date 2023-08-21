@@ -59,7 +59,8 @@ def get_run_name(timezone: str = "US/Eastern") -> str:
 
 # Directories
 ROOT_DIR = os.environ["ROOT_DIR"]
-GENECORPUS_DIR = os.path.join(ROOT_DIR, "Genecorpus")
+# INPUT_DIR = os.environ["INPUT_DIR"]
+GENECORPUS_DIR = os.path.join(ROOT_DIR, "input")
 
 # Seeds
 RANDOM_SEED = int(os.environ["RANDOM_SEED"])
