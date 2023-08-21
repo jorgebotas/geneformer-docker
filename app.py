@@ -41,16 +41,17 @@ def get_run_name(timezone: str = "US/Eastern") -> str:
     # set local time/directories
     timezone = pytz.timezone(timezone)
     date = datetime.datetime.now(tz=timezone)
-    datestamp = f"{str(date.year)[-2:]}.{date.month:02d}.{date.day:02d}__"
-    datestamp += f"{date.strftime('%X').replace(':','')}"
-    run = f"{datestamp}_NL{get_model('num_hidden_layers')}_"
-    run += f"EMB{get_model('hidden_size')}_"
-    run += f"ID{get_model('max_position_embeddings')}_"
-    run += f"E{get_training('num_train_epochs')}_"
-    run += f"B{get_training('per_device_train_batch_size')}_"
-    run += f"LR{get_training('learning_rate')}_"
-    run += f"LS{get_training('lr_scheduler_type')}_"
-    run += f"WU{get_training('warmup_steps')}"
+    datestamp = f"{str(date.year)[-2:]}.{date.month:02d}.{date.day:02d}_"
+    datestamp += f"{date.strftime('%X')}__"
+    run = f"{datestamp}__"
+    run += f"NL-{get_model('num_hidden_layers')}__"
+    run += f"EMB-{get_model('hidden_size')}__"
+    run += f"ID-{get_model('max_position_embeddings')}__"
+    run += f"E-{get_training('num_train_epochs')}__"
+    run += f"B-{get_training('per_device_train_batch_size')}__"
+    run += f"LR-{get_training('learning_rate')}__"
+    run += f"LS-{get_training('lr_scheduler_type')}__"
+    run += f"WU-{get_training('warmup_steps')}"
     return run
 
 
