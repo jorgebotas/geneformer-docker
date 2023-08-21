@@ -17,7 +17,7 @@ ENV TORCH_SEED=42
 # Copy necessary files
 COPY requirements.txt .
 # Clone Geneformer repo
-RUN git clone https://huggingface.co/ctheodoris/Geneformer
+# RUN git clone https://huggingface.co/ctheodoris/Geneformer
 COPY Geneformer /Geneformer
 
 # Update package repositories and install GCC
