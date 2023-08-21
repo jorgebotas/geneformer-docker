@@ -17,7 +17,7 @@ import os
 import pytz
 import torch
 from datasets import load_from_disk
-from transformers import BertConfig, BertForMaskedLM, TrainingArguments
+from transformers import BertConfig, BertForMaskedLM, TrainingArguments, logging
 
 from geneformer import GeneformerPretrainer
 
@@ -70,6 +70,9 @@ np.random.seed(RANDOM_SEED)
 torch.manual_seed(TORCH_SEED)
 torch.cuda.manual_seed_all(TORCH_SEED)
 
+# Set logging preferences
+logging.enable_default_handler() 
+logging.set_verbosity(logging.DEBUG)
 
 # Load token dictionary
 with open(path("Geneformer/geneformer/token_dictionary.pkl"), "rb") as pkl:
