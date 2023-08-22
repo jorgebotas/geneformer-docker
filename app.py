@@ -191,7 +191,7 @@ pretrainer = GeneformerPretrainer(
                            **TRAINING_PARAMETERS),
     train_dataset=dataset,
     example_lengths_file=path(GENECORPUS_DIR, 
-                              "genecorpus_30M_2048_lengths.pkl"),
+                              "genecorpus_30M_2048_sorted_lengths.pkl"),
     token_dictionary=TOKEN_DICT,
 )
 # Pretraining
