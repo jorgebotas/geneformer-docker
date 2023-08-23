@@ -7,6 +7,7 @@ tqdm>=4.27 # same as transfomers
 # Transformers
 datasets
 tensorflow # needed for Tensorboard logging
+tensorrt # Tensorflow integration with NVIDIA GPUs
 torch
 accelerate>=0.20.1 # same as transfomers
 transformers==4.31.0

@@ -45,5 +45,5 @@ USER appuser
 RUN mkdir -p ${ROOT_DIR} && chmod 777 ${ROOT_DIR}
 
 #CMD ["python", "-u", "app.py"]
-CMD ["deepspeed", "--num-gpus", "1", "app.py"]
+CMD ["deepspeed", "--num_gpus", "1", "app.py"]
 # CMD ["bash"]
