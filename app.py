@@ -12,11 +12,11 @@ import pickle
 import random
 from typing import Union
 
-import numpy as np
-import os
-import pytz
-import torch
 from datasets import load_from_disk
+import numpy as np
+import pytz
+import tensorrt
+import torch
 from transformers import BertConfig, BertForMaskedLM, TrainingArguments, logging
 
 from geneformer import GeneformerPretrainer
