@@ -29,6 +29,11 @@ RUN python -m pip install -r requirements.txt
 # Install Geneformer
 RUN python -m pip install ./Geneformer
 
+# CUDA and TensorRT global variables
+RUN export CUDNN_PATH=$(dirname $(python -c "import nvidia.cudnn;print(nvidia.cudnn.__file__)"))
+RUN export LD_LIBRARY_PATH=$CUDNN_PATH/lib:$LD_LIBRARY_PATH
+RUN echo $CUDNN_PATH $LD_LIBRARY_PATH
+
 WORKDIR /pretraining
 COPY . /pretraining
 
