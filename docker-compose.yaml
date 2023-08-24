@@ -18,14 +18,10 @@ services:
       - ${PRETRAINING_OUTPUT_PATH}:/pretraining/output
     ports:
       - "4304:3000"
-
-  test:
-      image: nvidia/cuda:12.2.0-base-ubuntu20.04
-      command: nvidia-smi
-      deploy:
-        resources:
-          reservations:
-            devices:
-              - driver: nvidia
-                count: 1
-                capabilities: [gpu]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
